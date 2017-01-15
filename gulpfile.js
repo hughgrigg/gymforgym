@@ -14,6 +14,17 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass(
+        'g4g.scss',
+        null,
+        'resources/assets/sass',
+        {
+            includePaths: [
+                'node_modules/foundation-sites/scss',
+                'node_modules/motion-ui/src'
+            ]
+        }
+    )
+        .webpack('g4g.js')
+        .version(['css/g4g.css', 'js/g4g.js']);
 });

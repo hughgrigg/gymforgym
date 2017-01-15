@@ -9,10 +9,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
+        "doctrine/dbal": "^2.5",
         "laravel/framework": "5.3.*",
         "roave/security-advisories": "dev-master"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.2",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.0",
@@ -24,7 +26,8 @@
             "database"
         ],
         "psr-4": {
-            "GymForGym\\": "app/"
+            "GymForGym\\": "app/",
+            "GymForGym\\Test\\": "tests/"
         }
     },
     "autoload-dev": {
@@ -41,10 +44,14 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan ide-helper:generate || true",
+            "php artisan ide-helper:meta || true",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate || true",
+            "php artisan ide-helper:meta || true",
             "php artisan optimize"
         ]
     },

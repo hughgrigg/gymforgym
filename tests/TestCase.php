@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Generator;
+
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -21,5 +23,23 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    /**
+     * @return Generator
+     */
+    protected function faker(): Generator
+    {
+        return app(Generator::class);
+    }
+
+    /**
+     * @param string $prefix
+     *
+     * @return string
+     */
+    protected function uniqid(string $prefix = ''): string
+    {
+        return uniqid($prefix, false);
     }
 }

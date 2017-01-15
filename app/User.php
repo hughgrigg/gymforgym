@@ -2,12 +2,29 @@
 
 namespace GymForGym;
 
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
+use Eloquent;
+use GymForGym\Structure\EmailAddress;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
+/**
+ * @mixin Builder
+ * @mixin Eloquent
+ *
+ * @property EmailAddress $email
+ * @property string       $password
+ * @property int          $id
+ * @property string       $display_name
+ * @property string       $remember_token
+ * @property Carbon       $created_at
+ * @property Carbon       $updated_at
+ */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +32,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -24,6 +43,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    /**
+     * @return EmailAddress
+     */
+    public function getEmailAttribute()
+    {
+        return new EmailAddress($this->attributes['email']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        return $this->attributes['display_name'] ?? $this->email->userName();
+    }
 }
