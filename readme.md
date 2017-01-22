@@ -2,6 +2,7 @@ Gym for Gym
 ===========
 
 [![Build Status](https://travis-ci.org/hughgrigg/gymforgym.svg?branch=master)](https://travis-ci.org/hughgrigg/gymforgym)
+[![Coverage Status](https://coveralls.io/repos/github/hughgrigg/gymforgym/badge.svg?branch=master)](https://coveralls.io/github/hughgrigg/gymforgym?branch=master)
 
 ## Docker
 

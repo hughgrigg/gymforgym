@@ -1,12 +1,30 @@
-sudo: required
-
 language: php
-
+php:
+  - '7.0'
+sudo: false
 services:
-  - docker
-
-before_install:
-  - cd laradock
-  - docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
-  - docker ps -a
-  - docker-compose exec workspace bash -c "/var/www/vendor/bin/phpunit"
+  - elasticsearch
+  - postgres
+install:
+  - export PATH=$PATH:$PWD/vendor/bin/
+  - mkdir -p build/logs
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - composer install --no-interaction --no-scripts
+  - composer require satooshi/php-coveralls:dev-master
+  - cp -n .env.travis .env
+  - nvm install 6 && nvm use 6
+  - rm -rf node_modules
+  - npm install -g npm
+  - npm cache clear
+  - npm install --no-progress
+  - npm install --no-progress -g gulp
+  - npm rebuild node-sass
+  - bundler install
+  - gulp
+  - php artisan key:generate
+  - php artisan storage:link
+  - php artisan route:cache; php artisan config:cache; php artisan optimize
+script:
+  - ./test.sh
+after_success:
+  - travis_retry php vendor/bin/coveralls -v
