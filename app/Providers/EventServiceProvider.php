@@ -2,10 +2,9 @@
 
 namespace GymForGym\Providers;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as Provider;
 
-class EventServiceProvider extends ServiceProvider
+class EventServiceProvider extends Provider
 {
     /**
      * The event listener mappings for the application.
@@ -17,16 +16,4 @@ class EventServiceProvider extends ServiceProvider
             'GymForGym\Listeners\EventListener',
         ],
     ];
-
-    /**
-     * Register any events for your application.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-
-        //
-    }
 }
