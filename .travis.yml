@@ -9,7 +9,7 @@ services:
   - docker
 
 before_install:
-  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - sed -i 's/LaraDock\/laradock:/LaraDock\/laradock//' .gitmodules
   - git submodule update --init --recursive
   - cd laradock
   - docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
