@@ -10,6 +10,3 @@ before_install:
   - docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
   - docker ps -a
   - docker-compose exec workspace bash -c "/var/www/vendor/bin/phpunit"
-
-script:
-  - phpunit

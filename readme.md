@@ -28,3 +28,9 @@ To see container IPs:
 ```bash
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 ```
+
+Run tests from host:
+
+```bash
+docker-compose exec workspace bash -c "/var/www/vendor/bin/phpunit"
+```
