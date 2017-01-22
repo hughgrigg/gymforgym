@@ -2,6 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+export PATH=$PATH:$PWD/vendor/bin/
 phpcs -v --standard=./tests/analysis/phpcs.xml app
 phpmd --strict app text ./tests/analysis/phpmd.xml
 gulp scss-lint

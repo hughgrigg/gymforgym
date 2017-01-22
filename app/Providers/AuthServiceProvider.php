@@ -2,9 +2,9 @@
 
 namespace GymForGym\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as Provider;
 
-class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends Provider
 {
     /**
      * The policy mappings for the application.

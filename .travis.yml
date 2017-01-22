@@ -25,6 +25,6 @@ install:
   - php artisan storage:link
   - php artisan route:cache; php artisan config:cache; php artisan optimize
 script:
-  - ./test.sh
+  - ./all-tests.sh
 after_success:
   - travis_retry php vendor/bin/coveralls -v

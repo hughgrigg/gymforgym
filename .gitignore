@@ -13,3 +13,4 @@ public/js
 /_ide_helper_models.php
 /public/build/
 test_db.sqlite
+build/
