@@ -1,0 +1,15 @@
+sudo: required
+
+language: php
+
+services:
+  - docker
+
+before_install:
+  - cd laradock
+  - docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
+  - docker ps -a
+  - docker-compose exec workspace bash -c "/var/www/vendor/bin/phpunit"
+
+script:
+  - phpunit
