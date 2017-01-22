@@ -2,8 +2,8 @@
 "use strict";
 
 const elixir   = require('laravel-elixir');
-const gulp     = require("gulp");
-const shell    = require("gulp-shell");
+const gulp     = require('gulp');
+const shell    = require('gulp-shell');
 const scssLint = require('gulp-scss-lint');
 
 require('laravel-elixir-vue-2');
