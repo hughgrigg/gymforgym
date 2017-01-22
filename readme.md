@@ -1,6 +1,8 @@
 Gym for Gym
 ===========
 
+[![Build Status](https://travis-ci.org/hughgrigg/gymforgym.svg?branch=master)](https://travis-ci.org/hughgrigg/gymforgym)
+
 ## Docker
 
 Add `localhost  www.gymforgym.dev` to `/etc/hosts`.
