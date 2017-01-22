@@ -5,9 +5,6 @@ namespace GymForGym\Domain;
 use GymForGym\Structure\Spatial\Point;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- *
- */
 class Gym extends Model
 {
     /**
