@@ -2,10 +2,15 @@ sudo: required
 
 language: php
 
+git:
+  submodules: false
+
 services:
   - docker
 
 before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
   - cd laradock
   - docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
   - docker ps -a
