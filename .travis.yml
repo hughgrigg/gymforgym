@@ -15,7 +15,7 @@ install:
   - nvm install 6 && nvm use 6
   - rm -rf node_modules
   - npm install -g npm
-  - npm cache clear
+  - npm cache verify
   - npm install --no-progress
   - npm install --no-progress -g gulp
   - npm rebuild node-sass
