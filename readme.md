@@ -4,34 +4,27 @@ Gym for Gym
 [![Build Status](https://travis-ci.org/hughgrigg/gymforgym.svg?branch=master)](https://travis-ci.org/hughgrigg/gymforgym)
 [![Coverage Status](https://coveralls.io/repos/github/hughgrigg/gymforgym/badge.svg?branch=master)](https://coveralls.io/github/hughgrigg/gymforgym?branch=master)
 
-## Docker
-
-Add `localhost  www.gymforgym.dev` to `/etc/hosts`.
+## Vagrant 
 
 ```bash
-cd laradock
-docker-compose up -d caddy postgres php-fpm redis beanstalkd elasticsearch
+git clone git@github.com:hughgrigg/gymforgym.git
+cd gymforgym
+git clone git@github.com:laravel/homestead.git ./vendor/laravel/homestead
+cp infrastructure/vagrant/Homestead.example.yaml Homestead.yaml
 ```
 
-Visit [https://www.gymforgym.dev](https://www.gymforgym.dev).
+Change the map key in Homestead.yaml to where you have cloned the gymforgym
+repo.
 
-To enter a container:
+Add this line to your hosts file (e.g. `/etc/hosts`):
 
-```bash
-cd laradock
-docker-compose exec workspace bash
+```
+192.168.10.10   www.gymforgym.dev
 ```
 
-Where `workspace` is the container you want to enter.
-
-To see container IPs:
+Then boot the Vagrant box and log in:
 
 ```bash
-docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
-```
-
-Run tests from host:
-
-```bash
-docker-compose exec workspace bash -c "/var/www/vendor/bin/phpunit"
+vagrant up --provision
+vagrant ssh
 ```

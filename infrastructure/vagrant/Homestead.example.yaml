@@ -1,0 +1,37 @@
+---
+ip: "192.168.10.88"
+memory: 3096
+cpus: 2
+hostname: gymforgym
+name: gymforgym
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "~/projects/gymforgym"
+      to: "/home/vagrant/gymforgym"
+      type: nfs
+
+sites:
+    - map: www.gymforgym.dev
+      to: "/home/vagrant/gymforgym/public"
+
+databases:
+    - gymforgym
+
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
