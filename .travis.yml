@@ -9,6 +9,11 @@ install:
   - export PATH=$PATH:$PWD/vendor/bin/
   - mkdir -p build/logs
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - git clone https://github.com/nikic/php-ast.git
+  - cd php-ast
+  - phpize
+  - ./configure
+  - make install
   - composer install --no-interaction --no-scripts
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
@@ -25,6 +30,6 @@ install:
   - php artisan storage:link
   - php artisan route:cache; php artisan config:cache; php artisan optimize
 script:
-  - ./all-tests.sh
+  - make test
 after_success:
   - travis_retry php vendor/bin/coveralls -v

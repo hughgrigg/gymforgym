@@ -28,5 +28,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.ssh.forward_agent = true
 
+    config.vm.provision "shell", path: "./infrastructure/vagrant/root-provision.sh", privileged: true
+    config.vm.provision "shell", path: "./infrastructure/vagrant/provision.sh", privileged: false
+
     config.vm.network "forwarded_port", guest: 11300, host: 11300, auto_correct: true
 end
