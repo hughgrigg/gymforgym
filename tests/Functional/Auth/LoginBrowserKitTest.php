@@ -2,8 +2,8 @@
 
 namespace GymForGym\Test\Functional\Auth;
 
-use GymForGym\User;
 use BrowserKitTestCase;
+use GymForGym\User;
 
 /**
  * Test user login functionality.
