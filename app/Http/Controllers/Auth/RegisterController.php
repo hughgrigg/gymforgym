@@ -4,6 +4,8 @@ namespace GymForGym\Http\Controllers\Auth;
 
 use GymForGym\Http\Controllers\Controller;
 use GymForGym\User;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Validator;
 
@@ -31,8 +33,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -44,9 +44,9 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return ValidatorContract
      */
-    protected function validator(array $data)
+    protected function validator(array $data): ValidatorContract
     {
         return Validator::make(
             $data,
@@ -62,9 +62,9 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return User
+     * @return User|Model
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
         return User::create(
             [

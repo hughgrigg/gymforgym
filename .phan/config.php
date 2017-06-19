@@ -15,7 +15,16 @@ return [
     // Thus, both first-party and third-party code being used by
     // your application should be included in this list.
     'directory_list'                              => [
-        '.',
+        'app',
+        'bootstrap',
+        'build',
+        'config',
+        'database',
+        'public',
+        'resources',
+        'routes',
+        'tests',
+        'vendor',
     ],
 
     // A directory list that defines files that will be excluded
@@ -30,13 +39,16 @@ return [
     //       should be added to both the `directory_list`
     //       and `exclude_analysis_directory_list` arrays.
     'exclude_analysis_directory_list'             => [
-        'vendor/',
-        'storage/',
-        'routes/',
-        'database/',
-        'bootstrap/',
-        '_ide_helper.php',
         '.phpstorm.meta.php',
+        '_ide_helper.php',
+        'bootstrap/',
+        'build/',
+        'database/',
+        'infrastructure/',
+        'resources',
+        'routes/',
+        'storage/',
+        'vendor/',
     ],
 
     // Backwards Compatibility Checking. This is slow
@@ -51,7 +63,7 @@ return [
     // an analysis. You should consider setting this
     // to true only when you wish you had more issues
     // to fix in your code base.
-    'quick_mode'                                  => false,
+    'quick_mode'                                  => true,
 
     // If enabled, check all methods that override a
     // parent method to make sure its signature is

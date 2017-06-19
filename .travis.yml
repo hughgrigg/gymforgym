@@ -1,6 +1,6 @@
 language: php
 php:
-  - '7.0'
+  - '7.1'
 sudo: false
 services:
   - elasticsearch
@@ -14,13 +14,8 @@ install:
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
   - nvm install 6 && nvm use 6
-  - rm -rf node_modules
   - npm install -g npm
-  - npm cache verify
-  - npm install --no-progress
-  - npm install --no-progress -g gulp
-  - npm rebuild node-sass
-  - bundler install
+  - make install
   - gulp
   - php artisan key:generate
   - php artisan storage:link

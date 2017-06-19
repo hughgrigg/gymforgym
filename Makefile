@@ -17,4 +17,6 @@ target vendor: composer.json composer.lock
 	composer install
 
 target node_modules: package.json yarn.lock
-	npm install
+	npm install --no-progress
+	npm install --no-progress -g gulp
+	npm rebuild node-sass

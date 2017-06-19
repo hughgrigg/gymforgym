@@ -8,7 +8,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0",
+        "php": "~7.1",
         "doctrine/dbal": "^2.5",
         "laravel/framework": "5.4.*",
         "roave/security-advisories": "dev-master"
@@ -54,12 +54,16 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan ide-helper:generate || true",
             "php artisan ide-helper:meta || true",
+            "mv _ide_helper.php build/ || true",
+            "mv .phpstorm.meta.php build/ || true",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan ide-helper:generate || true",
             "php artisan ide-helper:meta || true",
+            "mv _ide_helper.php build/ || true",
+            "mv .phpstorm.meta.php build/ || true",
             "php artisan optimize"
         ]
     },
