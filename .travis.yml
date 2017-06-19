@@ -10,7 +10,7 @@ install:
   - mkdir -p build/logs
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - (./infrastructure/install/install-php-ast.sh)
-  - composer install --no-interaction --no-scripts
+  - composer install --no-interaction
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
   - nvm install 6 && nvm use 6

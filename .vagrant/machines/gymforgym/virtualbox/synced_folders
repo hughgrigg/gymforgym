@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/gymforgym":{"type":null,"mount_options":["uid=1000","gid=1000"],"guestpath":"/home/vagrant/gymforgym","hostpath":"/home/xiuyuan/projects/gymforgym","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/xiuyuan/projects/gymforgym","disabled":false,"__vagrantfile":true}}}
