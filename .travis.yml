@@ -9,11 +9,7 @@ install:
   - export PATH=$PATH:$PWD/vendor/bin/
   - mkdir -p build/logs
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - git clone https://github.com/nikic/php-ast.git
-  - cd php-ast
-  - phpize
-  - ./configure
-  - make install
+  - (./infrastructure/install/install-php-ast.sh)
   - composer install --no-interaction --no-scripts
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
