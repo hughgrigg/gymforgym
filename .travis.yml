@@ -1,6 +1,6 @@
 language: php
 php:
-  - '7.0'
+  - '7.1'
 sudo: false
 services:
   - elasticsearch
@@ -9,22 +9,18 @@ install:
   - export PATH=$PATH:$PWD/vendor/bin/
   - mkdir -p build/logs
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - composer install --no-interaction --no-scripts
+  - (./infrastructure/install/install-php-ast.sh)
+  - composer install --no-interaction
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
   - nvm install 6 && nvm use 6
-  - rm -rf node_modules
   - npm install -g npm
-  - npm cache verify
-  - npm install --no-progress
-  - npm install --no-progress -g gulp
-  - npm rebuild node-sass
-  - bundler install
+  - make install
   - gulp
   - php artisan key:generate
   - php artisan storage:link
   - php artisan route:cache; php artisan config:cache; php artisan optimize
 script:
-  - ./all-tests.sh
+  - make test
 after_success:
   - travis_retry php vendor/bin/coveralls -v

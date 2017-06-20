@@ -2,10 +2,10 @@
 
 namespace GymForGym\Test\Functional\Auth;
 
+use BrowserKitTestCase;
 use GymForGym\User;
-use TestCase;
 
-class RegistrationTest extends TestCase
+class RegistrationBrowserKitTest extends BrowserKitTestCase
 {
     /**
      * Should be able to register for an account.

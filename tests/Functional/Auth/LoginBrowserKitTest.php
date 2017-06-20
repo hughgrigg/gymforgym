@@ -2,13 +2,13 @@
 
 namespace GymForGym\Test\Functional\Auth;
 
+use BrowserKitTestCase;
 use GymForGym\User;
-use TestCase;
 
 /**
  * Test user login functionality.
  */
-class LoginTest extends TestCase
+class LoginBrowserKitTest extends BrowserKitTestCase
 {
     /**
      * Should be able to go to the login form.

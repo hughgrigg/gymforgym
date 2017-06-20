@@ -14,3 +14,4 @@ public/js
 /public/build/
 test_db.sqlite
 build/
+.vagrant/

@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * @return EmailAddress
      */
-    public function getEmailAttribute()
+    public function getEmailAttribute(): Structure\EmailAddress
     {
         return new EmailAddress($this->attributes['email']);
     }
@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * @return string
      */
-    public function getDisplayNameAttribute()
+    public function getDisplayNameAttribute(): string
     {
         return $this->attributes['display_name'] ?? $this->email->userName();
     }

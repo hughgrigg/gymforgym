@@ -4,8 +4,10 @@ namespace GymForGym\Http\Controllers\Auth;
 
 use GymForGym\Http\Controllers\Controller;
 use GymForGym\User;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Validator;
+use Illuminate\Validation\Factory;
 
 class RegisterController extends Controller
 {
@@ -29,13 +31,15 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    /** @var Factory */
+    private $validatorFactory;
+
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @param Factory $validatorFactory
      */
-    public function __construct()
+    public function __construct(Factory $validatorFactory)
     {
+        $this->validatorFactory = $validatorFactory;
         $this->middleware('guest');
     }
 
@@ -44,11 +48,11 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return ValidatorContract
      */
-    protected function validator(array $data)
+    protected function validator(array $data): ValidatorContract
     {
-        return Validator::make(
+        return $this->validatorFactory->make(
             $data,
             [
                 'email'    => 'required|email|max:255|unique:users',
@@ -62,9 +66,9 @@ class RegisterController extends Controller
      *
      * @param array $data
      *
-     * @return User
+     * @return User|Model
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
         return User::create(
             [
