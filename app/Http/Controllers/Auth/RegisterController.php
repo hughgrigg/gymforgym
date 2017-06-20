@@ -7,7 +7,7 @@ use GymForGym\User;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Validator;
+use Illuminate\Validation\Factory;
 
 class RegisterController extends Controller
 {
@@ -31,11 +31,15 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    /** @var Factory */
+    private $validatorFactory;
+
     /**
-     * Create a new controller instance.
+     * @param Factory $validatorFactory
      */
-    public function __construct()
+    public function __construct(Factory $validatorFactory)
     {
+        $this->validatorFactory = $validatorFactory;
         $this->middleware('guest');
     }
 
@@ -48,7 +52,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data): ValidatorContract
     {
-        return Validator::make(
+        return $this->validatorFactory->make(
             $data,
             [
                 'email'    => 'required|email|max:255|unique:users',
