@@ -20,3 +20,9 @@ target node_modules: package.json yarn.lock
 	npm install --no-progress
 	npm install --no-progress -g gulp
 	npm rebuild node-sass
+
+SCSS = $(shell find resources/assets/sass -type f -name '*.scss')
+target public/css/g4g.css: $(SCSS)
+	gulp
+.PHONY: style
+target style: public/css/g4g.css
