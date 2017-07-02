@@ -15,3 +15,5 @@ public/js
 test_db.sqlite
 build/
 .vagrant/
+keys.*
+VIRTUAL
