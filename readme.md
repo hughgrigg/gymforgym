@@ -28,3 +28,13 @@ Then boot the Vagrant box and log in:
 vagrant up --provision
 vagrant ssh
 ```
+
+## Deployment
+
+```bash
+virtualenv --no-site-packages infrastructure/VIRTUAL --python $(which python2)
+source infrastructure/VIRTUAL/bin/activate
+pip install -r ./infrastructure/requirements.txt
+# Ensure ssh key is added, then:
+ansible-playbook ./infrastructure/ansible/web.yml -i ./infrastructure/ansible/hosts 
+```

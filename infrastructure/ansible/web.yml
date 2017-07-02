@@ -1,0 +1,269 @@
+---
+- hosts: web
+  become: true
+
+  tasks:
+
+    - name: add PHP 7 repository
+      apt_repository: repo='ppa:ondrej/php' state=present
+      register: ppastable
+
+    - name: install packages
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - git
+        - mcrypt
+        - nginx
+        - php7.1
+        - php7.1-cli
+        - php7.1-dev
+        - php7.1-curl
+        - php7.1-fpm
+        - php7.1-intl
+        - php7.1-json
+        - php7.1-mcrypt
+        - php7.1-pgsql
+        - php7.1-sqlite3
+        - php7.1-xml
+        - php7.1-mbstring
+        - php7.1-zip
+        - php7.1-gmp
+        - php-imagick
+        - sqlite3
+        - postgresql
+        - python-psycopg2
+        - makepasswd
+        - redis-server
+        - nodejs
+        - npm
+        - imagemagick
+        - supervisor
+        - htop
+
+    - name: ensure github.com is a known host
+      lineinfile:
+        dest: /root/.ssh/known_hosts
+        create: yes
+        state: present
+        line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+        regexp: "^github\\.com"
+
+    - name: PHP web memory limit
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
+        create: no
+        state: present
+        line: "memory_limit = 512M"
+        regexp: "^memory_limit = "
+
+    - name: PHP max filesize
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
+        create: no
+        state: present
+        line: "upload_max_filesize = 10M"
+        regexp: "^upload_max_filesize = "
+
+    - name: PHP max filesize
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
+        create: no
+        state: present
+        line: "post_max_size = 20M"
+        regexp: "^post_max_size = "
+
+    - name: install phpredis
+      script: phpredis.sh
+              creates=/etc/php/7.0/fpm/conf.d/20-redis.ini
+      notify:
+        - restart php7.1-fpm
+
+    - name: symlink node
+      file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
+
+    - name: ensure php7.1-fpm cgi.fix_pathinfo=0
+      lineinfile: dest=/etc/php/7.0/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
+      notify:
+        - restart php7.1-fpm
+        - restart nginx
+
+    - name: create /var/www/ directory
+      file: dest=/var/www/
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
+
+    - name: create /var/log/gymforgym directory
+      file: dest=/var/log/gymforgym
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
+
+    - name: clone git repository
+      become_user: www-data
+      git: >
+        dest=/var/www/gymforgym
+        repo=https://github.com/hughgrigg/gymforgym.git
+        version=master
+        update=yes
+        force=yes
+
+    - name: install composer
+      shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      args:
+        creates: /usr/local/bin/composer
+
+    - name: update composer
+      shell: /usr/local/bin/composer self-update
+
+    - name: install project with composer
+      become_user: www-data
+      composer: command=install
+                working_dir=/var/www/gymforgym
+                no_dev=true
+                no_scripts=true
+
+    - name: configure nginx
+      template: src={{item.src}} dest={{item.dest}}
+      with_items:
+        - {src: 'nginx.conf', dest: '/etc/nginx/sites-available/www.gymforgym.com.conf'}
+      notify:
+        - restart php7.1-fpm
+        - restart nginx
+
+    - name: enable nginx site
+      file: src=/etc/nginx/sites-available/www.gymforgym.com.conf
+            dest=/etc/nginx/sites-enabled/www.gymforgym.com.conf
+            state=link
+      notify:
+        - restart php7.1-fpm
+        - restart redis
+        - restart nginx
+
+    - name: configure supervisor
+      template: src=gymforgym-worker.conf
+                dest=/etc/supervisor/conf.d/gymforgym-worker.conf
+
+    - name: Copy public key into /var/www
+      authorized_key: user=www-data
+                      key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+    - name: Set www-data user shell
+      user: name=www-data shell=/bin/bash
+
+    - name: Enable UFW
+      ufw: direction=incoming policy=deny state=enabled
+
+    - name: UFW limit SSH
+      ufw: rule=limit port=ssh
+
+    - name: UFW open HTTP
+      ufw: rule=allow port=http
+
+    - name: UFW open HTTPS
+      ufw: rule=allow port=https
+
+    - include_vars: keys.yml
+
+    - name: create .env
+      template: src=.env.template
+                dest=/var/www/gymforgym/.env
+                force=yes
+
+    - name: Create database user
+      become: true
+      become_user: postgres
+      vars:
+        ansible_ssh_pipelining: true
+      postgresql_user:
+        name: gymforgym
+
+    - name: Ensure database is created
+      postgresql_db: name=gymforgym
+      become: true
+      become_user: postgres
+
+    - name: Ensure user has access to database
+      postgresql_user: db=gymforgym
+                       name=gymforgym
+                       password={{db_password}}
+                       priv=ALL
+      become: true
+      become_user: postgres
+
+    - name: Ensure user does not have unnecessary privilege
+      postgresql_user: name=gymforgym
+                       role_attr_flags=NOSUPERUSER,NOCREATEDB
+      become: true
+      become_user: postgres
+
+    - name: Ensure no other user can access the database
+      postgresql_privs: db=gymforgym
+                        role=PUBLIC
+                        type=database
+                        priv=ALL
+                        state=absent
+      become: true
+      become_user: postgres
+
+    - name: Laravel Scheduler
+      cron: >
+        job="run-one php /var/www/gymforgym/artisan schedule:run 1>> /dev/null 2>&1"
+        state=present
+        user=www-data
+        name="php artisan schedule:run"
+
+    - name: Refresh Laravel
+      shell: "cd /var/www/gymforgym && php artisan {{ item }}"
+      with_items:
+        - "storage:link"
+        - "migrate --force"
+        - "clear-compiled"
+        - "config:clear"
+        - "config:cache"
+        - "view:clear"
+        - "route:clear"
+        - "route:cache"
+        - "optimize"
+        - "queue:restart"
+
+    - name: make sure latest npm is installed
+      npm: name=npm global=yes
+
+    - name: create /var/www/node_modules directory
+      file: dest=/var/www/gymforgym/node_modules
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
+
+    - npm: path=/var/www/gymforgym production=yes
+      become_user: www-data
+
+    - name: rebuild node-sass
+      shell: "npm rebuild node-sass"
+
+    - name: run gulp tasks
+      become_user: www-data
+      shell: "cd /var/www/gymforgym && ./node_modules/.bin/gulp {{ item }} --production"
+      with_items:
+        - "sass"
+        - "styles"
+        - "typings"
+        - "typescript"
+        - "browserify"
+        - "version"
+        - "copy"
+
+  handlers:
+
+    - name: restart php7.1-fpm
+      service: name=php7.1-fpm state=restarted
+
+    - name: restart nginx
+      service: name=nginx state=restarted
+
+    - name: restart redis
+      service: name=redis-server state=restarted
