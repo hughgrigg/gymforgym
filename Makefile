@@ -17,8 +17,8 @@ target vendor: composer.json composer.lock
 	composer install
 
 target node_modules: package.json yarn.lock
-	npm install --no-progress
-	npm install --no-progress -g gulp
+	npm install --no-progress -g yarn gulp npm
+	yarn install
 	npm rebuild node-sass
 
 SCSS = $(shell find resources/assets/sass -type f -name '*.scss')

@@ -21,6 +21,7 @@
     "gulp-shell": "^0.5.2",
     "motion-ui": "^1.2.2",
     "node-sass": "^4.1.1",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "yarn": "^0.24.5"
   }
 }
