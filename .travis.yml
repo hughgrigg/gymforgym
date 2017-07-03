@@ -14,7 +14,6 @@ install:
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
   - nvm install 6 && nvm use 6
-  - npm install -g npm
   - make install
   - gulp
   - php artisan key:generate

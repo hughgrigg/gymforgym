@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f1c3cbb4fa547a132cd29c8e5203ca6",
+    "content-hash": "ded34834190033d5f6c6d201bdf69ad4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -520,16 +520,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.27",
+            "version": "v5.4.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404"
+                "reference": "442511fc62121085d184355e4f964c88942bbecb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/66f5e1b37cbd66e730ea18850ded6dc0ad570404",
-                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/442511fc62121085d184355e4f964c88942bbecb",
+                "reference": "442511fc62121085d184355e4f964c88942bbecb",
                 "shasum": ""
             },
             "require": {
@@ -645,7 +645,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-15T19:08:25+00:00"
+            "time": "2017-06-30T13:43:07+00:00"
         },
         {
             "name": "league/flysystem",
@@ -954,6 +954,56 @@
             "time": "2017-03-13T16:27:32+00:00"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.2",
             "source": {
@@ -1088,12 +1138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c"
+                "reference": "0b18b6bbeed070fb900ad78e81ffa1182a57a752"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
-                "reference": "7cd88c8d4e4e6b483633bb13c35bcec95fd6cd4c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0b18b6bbeed070fb900ad78e81ffa1182a57a752",
+                "reference": "0b18b6bbeed070fb900ad78e81ffa1182a57a752",
                 "shasum": ""
             },
             "conflict": {
@@ -1118,8 +1168,8 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=8,<8.2.8|>=8.3,<8.3.1",
-                "drupal/drupal": ">=8,<8.2.8|>=8.3,<8.3.1",
+                "drupal/core": ">=8,<8.3.4",
+                "drupal/drupal": ">=8,<8.3.4",
                 "firebase/php-jwt": "<2",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
@@ -1216,7 +1266,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-06-07T12:12:03+00:00"
+            "time": "2017-06-22T16:43:17+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2118,28 +2168,30 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.3.2",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "e82de98cef0d6597b1b686be0b5813a3a4bb53c5"
+                "reference": "87a02ff574f722c685e011f76692ab869ab64f6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/e82de98cef0d6597b1b686be0b5813a3a4bb53c5",
-                "reference": "e82de98cef0d6597b1b686be0b5813a3a4bb53c5",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/87a02ff574f722c685e011f76692ab869ab64f6c",
+                "reference": "87a02ff574f722c685e011f76692ab869ab64f6c",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/reflection-docblock": "^2.0.4",
-                "illuminate/console": "^5.0,<5.5",
-                "illuminate/filesystem": "^5.0,<5.5",
-                "illuminate/support": "^5.0,<5.5",
+                "illuminate/console": "^5.0,<5.6",
+                "illuminate/filesystem": "^5.0,<5.6",
+                "illuminate/support": "^5.0,<5.6",
                 "php": ">=5.4.0",
                 "symfony/class-loader": "^2.3|^3.0"
             },
             "require-dev": {
                 "doctrine/dbal": "~2.3",
+                "illuminate/config": "^5.0,<5.6",
+                "illuminate/view": "^5.0,<5.6",
                 "phpunit/phpunit": "4.*",
                 "scrutinizer/ocular": "~1.1",
                 "squizlabs/php_codesniffer": "~2.3"
@@ -2151,6 +2203,11 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.3-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -2180,7 +2237,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2017-02-22T12:27:33+00:00"
+            "time": "2017-06-16T14:08:59+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -2649,20 +2706,21 @@
         },
         {
             "name": "laravel/browser-kit-testing",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/browser-kit-testing.git",
-                "reference": "23f1a7eefcbca0797305b236600aa5426c9528f2"
+                "reference": "f0bb9f200ec35f9d876ded6eacfbc60868d311b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/browser-kit-testing/zipball/23f1a7eefcbca0797305b236600aa5426c9528f2",
-                "reference": "23f1a7eefcbca0797305b236600aa5426c9528f2",
+                "url": "https://api.github.com/repos/laravel/browser-kit-testing/zipball/f0bb9f200ec35f9d876ded6eacfbc60868d311b9",
+                "reference": "f0bb9f200ec35f9d876ded6eacfbc60868d311b9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
+                "phpunit/phpunit": "~6.0",
                 "symfony/css-selector": "~3.1",
                 "symfony/dom-crawler": "~3.1"
             },
@@ -2692,7 +2750,7 @@
                 "laravel",
                 "testing"
             ],
-            "time": "2017-05-26T12:46:48+00:00"
+            "time": "2017-06-21T11:44:53+00:00"
         },
         {
             "name": "laravel/homestead",
@@ -2916,16 +2974,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d"
+                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
-                "reference": "2b9e2f71b722f7c53918ab0c25f7646c2013f17d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0808939f81c1347a3c8a82a5925385a08074b0f1",
+                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1",
                 "shasum": ""
             },
             "require": {
@@ -2963,7 +3021,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-03-05T18:23:57+00:00"
+            "time": "2017-06-28T20:53:48+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -3634,16 +3692,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.2.2",
+            "version": "6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e"
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f2786490399836d2a544a34785c4a8d3ab32cf0e",
-                "reference": "f2786490399836d2a544a34785c4a8d3ab32cf0e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa5711d0559fc4b64deba0702be52d41434cbcb7",
+                "reference": "fa5711d0559fc4b64deba0702be52d41434cbcb7",
                 "shasum": ""
             },
             "require": {
@@ -3714,20 +3772,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-13T14:07:07+00:00"
+            "time": "2017-07-03T15:54:24+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf"
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/eabce450df194817a7d7e27e19013569a903a2bf",
-                "reference": "eabce450df194817a7d7e27e19013569a903a2bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
+                "reference": "d8833b396dce9162bb2eb5d59aee5a3ab3cfa5b4",
                 "shasum": ""
             },
             "require": {
@@ -3773,7 +3831,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-03-03T06:30:20+00:00"
+            "time": "2017-06-30T08:15:21+00:00"
         },
         {
             "name": "psr/container",
@@ -3826,16 +3884,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.8.6",
+            "version": "v0.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "7028d6d525fb183d50b249b7c07598e3d386b27d"
+                "reference": "fe65c30cbc55c71e61ba3a38b5a581149be31b8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7028d6d525fb183d50b249b7c07598e3d386b27d",
-                "reference": "7028d6d525fb183d50b249b7c07598e3d386b27d",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/fe65c30cbc55c71e61ba3a38b5a581149be31b8e",
+                "reference": "fe65c30cbc55c71e61ba3a38b5a581149be31b8e",
                 "shasum": ""
             },
             "require": {
@@ -3895,7 +3953,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-06-04T10:34:20+00:00"
+            "time": "2017-06-24T06:16:19+00:00"
         },
         {
             "name": "satooshi/php-coveralls",
@@ -4118,16 +4176,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3"
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
-                "reference": "02b6b2c7aefe2cdb1185b8dbf8718b0bcedf3ab3",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
+                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
                 "shasum": ""
             },
             "require": {
@@ -4139,7 +4197,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -4164,7 +4222,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-05-18T10:10:00+00:00"
+            "time": "2017-07-01T08:51:00+00:00"
         },
         {
             "name": "sebastian/exporter",

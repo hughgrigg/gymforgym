@@ -133,6 +133,11 @@
         - restart php7.1-fpm
         - restart nginx
 
+    - name: remove default nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
     - name: enable nginx site
       file: src=/etc/nginx/sites-available/www.gymforgym.com.conf
             dest=/etc/nginx/sites-enabled/www.gymforgym.com.conf
@@ -227,7 +232,6 @@
         - "route:clear"
         - "route:cache"
         - "optimize"
-        - "queue:restart"
 
     - name: make sure latest npm is installed
       npm: name=npm global=yes
@@ -239,7 +243,10 @@
             group=www-data
             mode=0700
 
-    - npm: path=/var/www/gymforgym production=yes
+    - name: yarn install
+      shell: ./node_modules/yarn/bin/yarn install
+      args:
+        chdir: /var/www/gymforgym
       become_user: www-data
 
     - name: rebuild node-sass
@@ -247,15 +254,7 @@
 
     - name: run gulp tasks
       become_user: www-data
-      shell: "cd /var/www/gymforgym && ./node_modules/.bin/gulp {{ item }} --production"
-      with_items:
-        - "sass"
-        - "styles"
-        - "typings"
-        - "typescript"
-        - "browserify"
-        - "version"
-        - "copy"
+      shell: "cd /var/www/gymforgym && ./node_modules/.bin/gulp --production"
 
   handlers:
 
