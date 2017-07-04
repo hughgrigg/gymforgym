@@ -9,7 +9,7 @@
 
             <hr>
 
-            <form role="form" method="POST" action="{{route('login')}}">
+            <form method="POST" action="{{route('login')}}">
                 {{csrf_field()}}
 
                 <label for="email" class="col-md-4 control-label">

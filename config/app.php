@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://www.gymforgym.dev/'),
+    'url' => env('APP_URL', 'https://www.gymforgym.dev/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,8 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
-        //
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
         /*
          * Application Service Providers...
