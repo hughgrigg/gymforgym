@@ -5,6 +5,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{{config('app.name', 'Gym for Gym')}}</title>
+    <meta http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests">
+    <base href="{{config('app.url')}}"/>
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{elixir('css/g4g.css')}}"/>
 </head>
